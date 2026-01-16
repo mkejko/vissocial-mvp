@@ -61,7 +61,10 @@ export async function generatePlan(data: { project_id: string; month: string; go
   let idx = 0;
   for (const itemId of itemIds) {
     const itemRow = (await q<any>(`SELECT visual_brief FROM content_items WHERE id=$1`, [itemId]))[0];
-    const prompt = buildPrompt(itemRow?.visual_brief ?? {});
+	const ATLAS_PROMPT =
+  "Vertical 4:5 Instagram ad, premium product photography. A realistic hardcover book titled 'ATLAS' (clean modern typography, cover clearly readable, minimal world-map graphic). Place the book in a beautiful travel location with cinematic light (vary: pyramids, London, Caribbean beach, Tokyo neon, Alps cabin, Santorini, NYC rooftop). Optional person holding/looking at the book. Sharp focus on the book, background softly blurred. No watermark, no extra text, no logos, no distorted letters.";
+	const prompt = ATLAS_PROMPT;
+    //const prompt = buildPrompt(itemRow?.visual_brief ?? {});
     const rjob = "job_" + uuid();
 
     await q(`INSERT INTO jobs(id, project_id, type, status, input)
