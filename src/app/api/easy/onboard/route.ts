@@ -17,14 +17,13 @@ export async function POST(req: Request) {
         body.brand_name ?? "Brand",
         body.ig_handle,
         ProjectStates.instagram_connected,
-        body.plan_type ?? "free"
+        body.plan_type ?? "free",
       ]
     );
 
-    // Jobs (MVP stubs)
     await qIngest.add("instagram.import", {
       project_id,
-      posts_limit: body?.import?.posts_limit ?? 40
+      posts_limit: body?.import?.posts_limit ?? 40,
     });
 
     await qIngest.add("website.crawl", { project_id });
@@ -35,12 +34,12 @@ export async function POST(req: Request) {
       { status: 202 }
     );
   } catch (err: any) {
-    console.error("❌ /api/easy/onboard failed:", err);
+    console.error("ONBOARD_FAILED", err);
 
     return NextResponse.json(
       {
         error: "ONBOARD_FAILED",
-        message: err?.message ?? "Unknown error"
+        message: err?.message ?? "Unknown error",
       },
       { status: 500 }
     );
