@@ -8,8 +8,8 @@
     "dev": "cross-env DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial REDIS_URL=redis://localhost:6379 next dev",
     "build": "next build",
     "start": "next start",
-    "worker:old": "tsx src/server/worker.ts",
-    "worker": "node dist/worker/index.js",
+    "worker:old": "cross-env PGHOST=localhost PGPORT=5433 PGDATABASE=vissocial PGUSER=vissocial PGPASSWORD=vissocial DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial REDIS_URL=redis://localhost:6379 tsx src/server/worker.ts",
+    "worker": "tsx src/server/worker.ts",
     "migrate:old": "tsx src/lib/sql.ts migrate",
     "migrate": "cross-env PGHOST=localhost PGPORT=5433 PGDATABASE=vissocial PGUSER=vissocial PGPASSWORD=vissocial DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial tsx src/lib/sql.ts migrate"
   },
