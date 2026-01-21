@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev:old": "next dev",
-	"dev": "cross-env DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial REDIS_URL=redis://localhost:6379 next dev",
+    "dev": "cross-env DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial REDIS_URL=redis://localhost:6379 next dev",
     "build": "next build",
     "start": "next start",
     "worker:old": "tsx src/server/worker.ts",
-	"worker": "cross-env PGHOST=localhost PGPORT=5433 PGDATABASE=vissocial PGUSER=vissocial PGPASSWORD=vissocial DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial REDIS_URL=redis://localhost:6379 tsx src/server/worker.ts",
+    "worker": "node dist/worker/index.js",
     "migrate:old": "tsx src/lib/sql.ts migrate",
-	"migrate": "cross-env PGHOST=localhost PGPORT=5433 PGDATABASE=vissocial PGUSER=vissocial PGPASSWORD=vissocial DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial tsx src/lib/sql.ts migrate"
+    "migrate": "cross-env PGHOST=localhost PGPORT=5433 PGDATABASE=vissocial PGUSER=vissocial PGPASSWORD=vissocial DATABASE_URL=postgresql://vissocial:vissocial@localhost:5433/vissocial tsx src/lib/sql.ts migrate"
   },
   "dependencies": {
     "bullmq": "^5.13.0",
@@ -19,7 +19,7 @@
     "dayjs": "^1.11.11",
     "dotenv": "^17.2.3",
     "jszip": "^3.10.1",
-    "next": "14.2.5",
+    "next": "^14.2.35",
     "pg": "^8.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
